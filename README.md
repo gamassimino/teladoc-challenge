@@ -1,24 +1,78 @@
-# README
+## PROBLEM 1
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Fill in function below
 
-Things you may want to cover:
 
-* Ruby version
+ Given a list of strings, and integer, i
+ find all strings less then length i, then group
+ and count the number of strings by their length
 
-* System dependencies
+ example:
+ strings = [ 'abc', 'defg', 'hi' ,'a', 'b', 'ze', 'ae' ]
+ i = 4
 
-* Configuration
+ output = { 1: 2, 2: 3, 3: 1 }
 
-* Database creation
+def filter_and_group(strings, i)
+end
 
-* Database initialization
+## PROBLEM 2
 
-* How to run the test suite
+### In what ways can we refactor this code
 
-* Services (job queues, cache servers, search engines, etc.)
+ `app/models/user.rb`
+ ```rb
+ class User < ActiveRecord::Record
+ attr_accessor :first_name, :last_name
+ end
+ ```
 
-* Deployment instructions
+ `app/views/users/show.html.erb`
+ ```erb
+ @user = User.find(1)
+ <p> <%= @user.full_name %> </p>
+ ```
 
-* ...
+ `app/views/users/other_1.html.erb`
+ ```erb
+ <p> <%= @user.first_nm %> <%= @user.last_nm %> </p>
+ ```
+
+ `app/views/users/other_2.html.erb`
+ ```erb
+ <p> <%= @user.first_nm %> <%= @user.last_nm %> </p>
+ ```
+
+ `app/views/users/other_3.html.erb`
+ ```erb
+ <p> <%= @user.first_nm %> <%= @user.last_nm %> </p>
+ ```
+
+## PROBLEM 3
+
+### What are the dangers/inefficiencies of this code below, how can we fix it
+
+
+ `app/models/book.rb`
+ ```rb
+class Book < ActiveRecord::Record
+has_many :reviews
+end
+
+class Review < ActiveRecord::Record
+belongs_to :user
+belongs_to :book
+end
+
+class User < ActiveRecord::Record
+has_many :reviews
+end
+```
+
+`app/views/users/show.html.erb`
+```erb
+@book = Book.find(1)
+@book.reviews.each do |review|
+<%= review.content.html_safe %> by <%= review.user.full_name %>
+end
+```
