@@ -1,0 +1,18 @@
+<!-- code for PROBLEM 2 -->
+<!-- 
+  for this problem I created a show method on user controller that receive any
+  user id and redirect you to the same view but with a different user saved on
+  @user variable, then you can avoid other_1, other_2 & other_3 views
+
+  if you want to keep thouse view, the refactor will be create a partial that
+  renders <p> <%#= @user.full_name %> </p> and call it in each view
+-->
+<!-- <p> <%#= @user.full_name %> </p> -->
+
+
+<!-- code for PROBLEM 3 -->
+<% @book = Book.find(1) %>
+
+<% @book.reviews.includes(:user).each do |review| %>
+  <%= review.content.html_safe %> by <%= review.user.full_name %>
+<% end %>
